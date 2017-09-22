@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hello!</title>
+<link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body><div class="container"><h3 id="table-of-contents">Table of contents</h3>
+
+<p><div class="toc">
+<ul>
+<li><ul>
+<li><ul>
+<li><a href="#table-of-contents">Table of contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#upgrade-helpdeskeaudewebro">Upgrade helpdesk.eaudeweb.ro!</a><ul>
+<li><ul>
+<li><a href="#container-diagram">Container Diagram</a><ul>
+<li><a href="#steps-on-local-host"> Steps on local host</a></li>
+<li><a href="#steps-on-mysql-container"> Steps on MYSQL Container</a></li>
+<li><a href="#start-redmine-container"> Start redmine container</a></li>
+<li><a href="#read-the-logs-to-make-sure-that-the-bundle-update-is-done">  Read the logs to make sure that the bundle update is done</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</p>
+
+
+
+<h2 id="upgrade-helpdeskeaudewebro-steps">Upgrade helpdesk.eaudeweb.ro Steps !</h2>
+
+<h4 id="container-diagram">Container Diagram</h4>
+
+<div class="sequence-diagram"><svg height="324" version="1.1" width="556.71875" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative; left: -0.5px; top: 0.734375px;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.2</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><marker id="raphael-marker-endblock55-obj2508" markerHeight="5" markerWidth="5" orient="auto" refX="2.5" refY="2.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block" transform="rotate(180 2.5 2.5) scale(1,1)" stroke-width="1.0000" fill="#000" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker></defs><rect x="10" y="20" width="70.84375" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="19.984375" y="30" width="50.84375" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="45.421875" y="39.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: &quot;Andale Mono&quot;, monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">redmine</tspan></text><rect x="10" y="265" width="70.84375" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="19.984375" y="275" width="50.84375" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="45.421875" y="284.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: &quot;Andale Mono&quot;, monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">redmine</tspan></text><path fill="none" stroke="#000000" d="M45.421875,59L45.421875,265" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="188.5" y="20" width="57" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="198.5" y="30" width="37" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="217" y="39.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: &quot;Andale Mono&quot;, monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">mysql</tspan></text><rect x="188.5" y="265" width="57" height="39" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="198.5" y="275" width="37" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="217" y="284.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: &quot;Andale Mono&quot;, monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">mysql</tspan></text><path fill="none" stroke="#000000" d="M217,59L217,265" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="68.703125" y="74.5" width="125" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="131.2109375" y="84" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: &quot;Andale Mono&quot;, monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">depends_on:- mysql</tspan></text><path fill="none" stroke="#000000" d="M45.421875,98C45.421875,98,183.76751329377294,98,212.00407423459183,98" stroke-width="2" marker-end="url(#raphael-marker-endblock55-obj2508)" stroke-dasharray="6,2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="65.421875" y="118" width="131.578125" height="29" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="70.40625" y="123" width="121.578125" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="131.2109375" y="132.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: &quot;Andale Mono&quot;, monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">mysql will start first</tspan></text><rect x="237" y="167" width="140.65625" height="29" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="241.984375" y="172" width="130.65625" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="307.328125" y="181.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: &quot;Andale Mono&quot;, monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">keeps file on volumes</tspan></text><rect x="237" y="216" width="241.21875" height="29" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="241.984375" y="221" width="231.21875" height="19" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="357.609375" y="230.5" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: &quot;Andale Mono&quot;, monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">when it starts will create an empty db</tspan></text></svg></div>
+
+
+
+<h4 id="steps-on-local-host"><i class="icon-pencil"></i> Steps on local host</h4>
+
+
+
+<pre class="prettyprint"><code class=" hljs asciidoc">[andra@naruto redmine.docker]$ docker-compose ps
+<span class="hljs-header">Name   Command   State   Ports
+------------------------------</span>
+[andra@naruto redmine.docker]$ ls
+docker-compose.yml  Dockerfile  entrypoint.sh  patches  plugins  README.md  redmine.crontab  scripts</code></pre>
+
+<p><code>[andra@naruto redmine.docker]$ docker images</code></p>
+
+<table>
+<thead>
+<tr>
+  <th>REPOSITORY</th>
+  <th>TAG</th>
+  <th>IMAGE ID</th>
+  <th>CREATED</th>
+  <th>SIZE</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>anecula/edw_redmine</td>
+  <td>latest</td>
+  <td>7db6e0b57f5e</td>
+  <td>18 hours ago</td>
+  <td>847MB</td>
+</tr>
+</tbody></table>
+
+
+
+
+<pre class="prettyprint"><code class=" hljs r">andra@naruto redmine.docker]$ docker-compose up -d mysql
+Creating redmine_mysql <span class="hljs-keyword">...</span> 
+Creating redmine_mysql <span class="hljs-keyword">...</span> done\</code></pre>
+
+<p><code>[andra@naruto redmine.docker]$ docker-compose ps</code></p>
+
+<table>
+<thead>
+<tr>
+  <th>Name</th>
+  <th>Command</th>
+  <th>State</th>
+  <th>Ports</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>redmine_mysql</td>
+  <td>docker-entrypoint.sh –cha …</td>
+  <td>Up</td>
+  <td>0.0.0.0:32769-13306/tcp, 3306/tcp</td>
+</tr>
+</tbody></table>
+
+
+
+
+<h4 id="steps-on-mysql-container"><i class="icon-pencil"></i> Steps on MYSQL Container</h4>
+
+<p><i class="icon-cog"></i> <strong>Start only the mysql container</strong></p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby">[andra<span class="hljs-variable">@naruto</span> redmine.docker]<span class="hljs-variable">$ </span>docker exec -it redmine_mysql  bash</code></pre>
+
+<p><i class="icon-cog"></i> <strong>On mysql container</strong></p>
+
+
+
+<pre class="prettyprint"><code class=" hljs smalltalk">root@<span class="hljs-number">895798</span><span class="hljs-method">a5700d:</span>/# mysql -u redmine -psecret
+<span class="hljs-class">Welcome</span> to the <span class="hljs-class">MySQL</span> monitor.  <span class="hljs-class">Commands</span> end with ; or \g.
+<span class="hljs-class">Your</span> <span class="hljs-class">MySQL</span> connection id is <span class="hljs-number">1</span>
+<span class="hljs-class">Server</span> <span class="hljs-method">version:</span> <span class="hljs-number">5.5</span><span class="hljs-number">.57</span> <span class="hljs-class">MySQL</span> <span class="hljs-class">Community</span> <span class="hljs-class">Server</span> (<span class="hljs-class">GPL</span>)
+
+<span class="hljs-class">Copyright</span> (c) <span class="hljs-number">2000</span>, <span class="hljs-number">2017</span>, <span class="hljs-class">Oracle</span> and/or its affiliates. <span class="hljs-class">All</span> rights reserved.
+
+<span class="hljs-class">Oracle</span> is a registered trademark of <span class="hljs-class">Oracle</span> <span class="hljs-class">Corporation</span> and/or its
+affiliates. <span class="hljs-class">Other</span> names may be trademarks of their respective
+owners.
+
+<span class="hljs-class">Type</span> <span class="hljs-string">'help;'</span> or <span class="hljs-string">'\h'</span> for help. <span class="hljs-class">Type</span> <span class="hljs-string">'\c'</span> to clear the current input statement.
+
+mysql&gt; show databases;
++--------------------+
+| <span class="hljs-class">Database</span>           |
++--------------------+
+<span class="hljs-localvars">| information_schema |</span>
+<span class="hljs-localvars">| redmine            |</span>
++--------------------+
+<span class="hljs-number">2</span> rows in set (<span class="hljs-number">0.01</span> sec)
+
+mysql&gt; use redmine;
+<span class="hljs-class">Reading</span> table information for completion of table and column names
+<span class="hljs-class">You</span> can turn off this feature to get a quicker startup with -<span class="hljs-class">A</span>
+
+<span class="hljs-class">Database</span> changed
+mysql&gt; show tables;
++-------------------------------------+
+| <span class="hljs-class">Tables_in_redmine</span>                   |
++-------------------------------------+
+<span class="hljs-localvars">| agile_colors                        |</span>
+<span class="hljs-localvars">| agile_data                          |</span>
+<span class="hljs-localvars">| attachments                         |</span>
+<span class="hljs-localvars">| auth_sources                        |</span>
+<span class="hljs-localvars">| boards                              |</span>
+<span class="hljs-localvars">| changes                             |</span>
+<span class="hljs-localvars">| changeset_parents                   |</span>
+<span class="hljs-localvars">| changesets                          |</span>
+<span class="hljs-localvars">| changesets_issues                   |</span>
+<span class="hljs-localvars">| checklist_template_categories       |</span>
+<span class="hljs-localvars">| checklist_templates                 |</span>
+<span class="hljs-localvars">| checklists                          |</span>
+<span class="hljs-localvars">| code_review_project_settings        |</span>
+<span class="hljs-localvars">| code_review_user_settings           |</span>
+<span class="hljs-localvars">| code_reviews                        |</span>
+<span class="hljs-localvars">| comments                            |</span>
+<span class="hljs-localvars">| custom_field_enumerations           |</span>
+<span class="hljs-localvars">| custom_fields                       |</span>
+<span class="hljs-localvars">| custom_fields_projects              |</span>
+<span class="hljs-localvars">| custom_fields_roles                 |</span>
+<span class="hljs-localvars">| custom_fields_trackers              |</span>
+<span class="hljs-localvars">| custom_values                       |</span>
+<span class="hljs-localvars">| documents                           |</span>
+<span class="hljs-localvars">| email_addresses                     |</span>
+<span class="hljs-localvars">| enabled_modules                     |</span>
+<span class="hljs-localvars">| enumerations                        |</span>
+<span class="hljs-localvars">| groups_users                        |</span>
+<span class="hljs-localvars">| import_items                        |</span>
+<span class="hljs-localvars">| imports                             |</span>
+<span class="hljs-localvars">| issue_categories                    |</span>
+<span class="hljs-localvars">| issue_relations                     |</span>
+<span class="hljs-localvars">| issue_status_kanban_states          |</span>
+<span class="hljs-localvars">| issue_statuses                      |</span>
+<span class="hljs-localvars">| issues                              |</span>
+<span class="hljs-localvars">| journal_details                     |</span>
+<span class="hljs-localvars">| journals                            |</span>
+<span class="hljs-localvars">| kanban_cards                        |</span>
+<span class="hljs-localvars">| kanban_panes                        |</span>
+<span class="hljs-localvars">| kanban_states                       |</span>
+<span class="hljs-localvars">| kanban_workflows                    |</span>
+<span class="hljs-localvars">| kanbans                             |</span>
+<span class="hljs-localvars">| member_roles                        |</span>
+<span class="hljs-localvars">| members                             |</span>
+<span class="hljs-localvars">| messages                            |</span>
+<span class="hljs-localvars">| news                                |</span>
+<span class="hljs-localvars">| open_id_authentication_associations |</span>
+<span class="hljs-localvars">| open_id_authentication_nonces       |</span>
+<span class="hljs-localvars">| plugin_schema_info                  |</span>
+<span class="hljs-localvars">| projects                            |</span>
+<span class="hljs-localvars">| projects_trackers                   |</span>
+<span class="hljs-localvars">| queries                             |</span>
+<span class="hljs-localvars">| queries_roles                       |</span>
+<span class="hljs-localvars">| redhopper_issues                    |</span>
+<span class="hljs-localvars">| repositories                        |</span>
+<span class="hljs-localvars">| roles                               |</span>
+<span class="hljs-localvars">| roles_managed_roles                 |</span>
+<span class="hljs-localvars">| schema_migrations                   |</span>
+<span class="hljs-localvars">| settings                            |</span>
+<span class="hljs-localvars">| time_entries                        |</span>
+<span class="hljs-localvars">| tokens                              |</span>
+<span class="hljs-localvars">| trackers                            |</span>
+<span class="hljs-localvars">| user_preferences                    |</span>
+<span class="hljs-localvars">| users                               |</span>
+<span class="hljs-localvars">| versions                            |</span>
+<span class="hljs-localvars">| watchers                            |</span>
+<span class="hljs-localvars">| wiki_content_versions               |</span>
+<span class="hljs-localvars">| wiki_contents                       |</span>
+<span class="hljs-localvars">| wiki_pages                          |</span>
+<span class="hljs-localvars">| wiki_redirects                      |</span>
+<span class="hljs-localvars">| wikis                               |</span>
+<span class="hljs-localvars">| workflows                           |</span>
++-------------------------------------+
+<span class="hljs-number">71</span> rows in set (<span class="hljs-number">0.00</span> sec)
+
+mysql&gt; exit;
+<span class="hljs-class">Bye</span>
+root@<span class="hljs-number">895798</span><span class="hljs-method">a5700d:</span>/# exit
+exit</code></pre>
+
+
+
+<h4 id="start-redmine-container"><i class="icon-pencil"></i> Start redmine container</h4>
+
+
+
+<pre class="prettyprint"><code class=" hljs r">[andra@naruto redmine.docker]$ docker-compose ps
+    Name                   Command               State                 Ports               
+-------------------------------------------------------------------------------------------
+redmine_mysql   docker-entrypoint.sh --cha <span class="hljs-keyword">...</span>   Up      <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">32769</span>-&gt;<span class="hljs-number">13306</span>/tcp, <span class="hljs-number">3306</span>/tcp
+[andra@naruto redmine.docker]$ docker-compose up -d
+redmine_mysql is up-to-date
+Creating redmine <span class="hljs-keyword">...</span> 
+Creating redmine <span class="hljs-keyword">...</span> done</code></pre>
+
+<p><i class="icon-cog"></i> <strong>See containers </strong></p>
+
+
+
+<pre class="prettyprint"><code class=" hljs asciidoc">[andra@naruto redmine.docker]$ docker-compose ps
+
+
+<span class="hljs-header"> Name              State       Ports               
+-------------------------------------------------------------------------------------</span>
+redmine             Up          0.0.0.0:8090-&gt;3000/tcp            
+redmine<span class="hljs-emphasis">_mysql       Up          0.0.0.0:32769-&gt;13306/tcp, 3306/tcp</span></code></pre>
+
+
+
+<h4 id="read-the-logs-to-make-sure-that-the-bundle-update-is-done"><i class="icon-file"></i>  Read the logs to make sure that the bundle update is done</h4>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby">[andra<span class="hljs-variable">@naruto</span> redmine.docker]<span class="hljs-variable">$ </span>docker logs -f redmine</code></pre></div></body>
+</html>
